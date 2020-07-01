@@ -306,6 +306,19 @@ bool AD7124::Begin()
 	return true;
 }
 
+bool AD7124::SetDataRate(uint8_t Channel, uint16_t DataRate)
+{
+	if (Channel > (AD7124ChannelCount-1))
+	{
+		Channel = (AD7124ChannelCount-1);
+	}
+	ChannelRegister ChannelSettings = GetChannelRegister(Channel);
+	FilterRegister RegisterSettings = GetFilterRegister(ChannelSettings.Configuration);
+	RegisterSettings.DataRate = DataRate;
+	SetFilterRegister(ChannelSettings.Configuration,RegisterSettings);
+	return true;
+}
+
 void AD7124::Reset()
 {
 	for (uint8_t Index = 0; Index < AD7124SPIBufferSize; ++Index)

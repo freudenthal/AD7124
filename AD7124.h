@@ -147,6 +147,7 @@
 #define AD7124NumberOfRegisters 57
 #define AD7124SPIBufferSize 8
 #define AD7124ConfigurationSize 8
+#define AD7124ChannelCount 16
 
 class AD7124
 {
@@ -511,6 +512,7 @@ class AD7124
 		uint32_t GetOffsetRegister(uint8_t Offset);
 		void SetOffsetRegister(uint8_t Offset, uint32_t NewSettings);
 		uint32_t GetGainRegister(uint8_t Gain);
+		bool SetDataRate(uint8_t Channel, uint16_t DataRate);
 		void SetGainRegister(uint8_t Gain, uint32_t NewSettings);
 		SPISettings* GetSPISettings();
 	private:
