@@ -515,6 +515,17 @@ class AD7124
 		bool SetDataRate(uint8_t Channel, uint16_t DataRate);
 		void SetGainRegister(uint8_t Gain, uint32_t NewSettings);
 		SPISettings* GetSPISettings();
+		static void PrintStatusRegister(const StatusRegister Register);
+		static void PrintControlRegister(const ControlRegister Register);
+		static void PrintIOSettingsRegister(const IOSettingsRegister Register);
+		static void PrintIOBiasRegister(const IOBiasRegister Register);
+		static void PrintErrorRegister(const ErrorRegister Register);
+		static void PrintErrorEnableRegister(const ErrorEnableRegister Register);
+		static void PrintChannelRegister(const ChannelRegister Register);
+		static void PrintConfigurationRegister(const ConfigurationRegister Register);
+		static void PrintFilterRegister(const FilterRegister Register);
+		static void PrintIDRegister(const IDRegister Register);
+		static void PrintDataRegister(const DataRegister Register);
 	private:
 		void UpdateInternalControlRegisters(ControlRegister Register);
 		Registers ConvertChannelToRegister(uint8_t Channel);

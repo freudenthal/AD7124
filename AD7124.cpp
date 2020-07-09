@@ -242,6 +242,243 @@ const AD7124::FilterRegister AD7124::InitFilterSettingsDefault
 	.DataRate = 240
 };
 
+void AD7124::PrintStatusRegister(const StatusRegister Register)
+{
+	Serial.print("[AD7124STATUS](");
+	Serial.print(Register.Ready);
+	Serial.print(",");
+	Serial.print(Register.Error);
+	Serial.print(",");
+	Serial.print(Register.PowerOnReset);
+	Serial.print(",");
+	Serial.print(Register.CurrentChannel);
+	Serial.print(")\n");
+}
+
+void AD7124::PrintControlRegister(const ControlRegister Register)
+{
+	Serial.print("[AD7124CONTROL](");
+	Serial.print(Register.DOUTFunction);
+	Serial.print(",");
+	Serial.print(Register.ContinousRead);
+	Serial.print(",");
+	Serial.print(Register.DataStatus);
+	Serial.print(",");
+	Serial.print(Register.CSEnable);
+	Serial.print(",");
+	Serial.print(Register.ReferenceEnable);
+	Serial.print(",");
+	Serial.print((uint8_t)(Register.PowerMode));
+	Serial.print(",");
+	Serial.print((uint8_t)(Register.OperatingMode));
+	Serial.print(",");
+	Serial.print((uint8_t)(Register.ClockMode));
+	Serial.print(")\n");
+}
+
+void AD7124::PrintIOSettingsRegister(const IOSettingsRegister Register)
+{
+	Serial.print("[AD7124IOSETTINGS](");
+	Serial.print(Register.GPIOData0);
+	Serial.print(",");
+	Serial.print(Register.GPIOData1);
+	Serial.print(",");
+	Serial.print(Register.GPIOControl0);
+	Serial.print(",");
+	Serial.print(Register.GPIOControl1);
+	Serial.print(",");
+	Serial.print(Register.PowerDownSwitch);
+	Serial.print(",");
+	Serial.print((uint8_t)(Register.ExcitationCurrent0));
+	Serial.print(",");
+	Serial.print((uint8_t)(Register.ExcitationCurrent1));
+	Serial.print(",");
+	Serial.print((uint8_t)(Register.ExcitationOuput0));
+	Serial.print(",");
+	Serial.print((uint8_t)(Register.ExcitationOuput1));
+	Serial.print(")\n");
+}
+
+void AD7124::PrintIOBiasRegister(const IOBiasRegister Register)
+{
+	Serial.print("[AD7124IOSETTINGS](");
+	Serial.print(Register.AIN7);
+	Serial.print(",");
+	Serial.print(Register.AIN6);
+	Serial.print(",");
+	Serial.print(Register.AIN5);
+	Serial.print(",");
+	Serial.print(Register.AIN4);
+	Serial.print(",");
+	Serial.print(Register.AIN3);
+	Serial.print(",");
+	Serial.print(Register.AIN2);
+	Serial.print(",");
+	Serial.print(Register.AIN1);
+	Serial.print(",");
+	Serial.print(Register.AIN0);
+	Serial.print(")\n");
+}
+
+void AD7124::PrintErrorRegister(const ErrorRegister Register)
+{
+	Serial.print("[AD7124ERROR](");
+	Serial.print(Register.ROM);
+	Serial.print(",");
+	Serial.print(Register.Memory);
+	Serial.print(",");
+	Serial.print(Register.SPICRC);
+	Serial.print(",");
+	Serial.print(Register.SPIWrite);
+	Serial.print(",");
+	Serial.print(Register.SPIRead);
+	Serial.print(",");
+	Serial.print(Register.SPIClk);
+	Serial.print(",");
+	Serial.print(Register.SPIIgnore);
+	Serial.print(",");
+	Serial.print(Register.AnalogueLDO);
+	Serial.print(",");
+	Serial.print(Register.DigitalLDO);
+	Serial.print(",");
+	Serial.print(Register.RefDetect);
+	Serial.print(",");
+	Serial.print(Register.UnderAINM);
+	Serial.print(",");
+	Serial.print(Register.OverAINM);
+	Serial.print(",");
+	Serial.print(Register.UnderAINP);
+	Serial.print(",");
+	Serial.print(Register.OverAINP);
+	Serial.print(",");
+	Serial.print(Register.Saturation);
+	Serial.print(",");
+	Serial.print(Register.Convert);
+	Serial.print(",");
+	Serial.print(Register.Calibration);
+	Serial.print(",");
+	Serial.print(Register.LDOCapacitor);
+	Serial.print(")\n");
+}
+
+void AD7124::PrintErrorEnableRegister(const ErrorEnableRegister Register)
+{
+	Serial.print("[AD7124ERROREN](");
+	Serial.print((uint8_t)(Register.LDOCheck));
+	Serial.print(",");
+	Serial.print(Register.ClockCountEnabled);
+	Serial.print(",");
+	Serial.print(Register.LDOCapacitorDisconnect);
+	Serial.print(",");
+	Serial.print(Register.Calibration);
+	Serial.print(",");
+	Serial.print(Register.Convert);
+	Serial.print(",");
+	Serial.print(Register.Saturation);
+	Serial.print(",");
+	Serial.print(Register.OverAINP);
+	Serial.print(",");
+	Serial.print(Register.UnderAINP);
+	Serial.print(",");
+	Serial.print(Register.OverAINM);
+	Serial.print(",");
+	Serial.print(Register.UnderAINM);
+	Serial.print(",");
+	Serial.print(Register.RefDetect);
+	Serial.print(",");
+	Serial.print(Register.DigitalLDOTest);
+	Serial.print(",");
+	Serial.print(Register.DigitalLDO);
+	Serial.print(",");
+	Serial.print(Register.AnalogueLDOTest);
+	Serial.print(",");
+	Serial.print(Register.AnalogueLDO);
+	Serial.print(",");
+	Serial.print(Register.SPIIgnore);
+	Serial.print(",");
+	Serial.print(Register.SPIClk);
+	Serial.print(",");
+	Serial.print(Register.SPIRead);
+	Serial.print(",");
+	Serial.print(Register.SPIWrite);
+	Serial.print(",");
+	Serial.print(Register.SPICRC);
+	Serial.print(",");
+	Serial.print(Register.Memory);
+	Serial.print(",");
+	Serial.print(Register.ROM);
+	Serial.print(")\n");
+}
+
+void AD7124::PrintChannelRegister(const ChannelRegister Register)
+{
+	Serial.print("[AD7124CHANNEL](");
+	Serial.print(Register.Enable);
+	Serial.print(",");
+	Serial.print(Register.Configuration);
+	Serial.print(",");
+	Serial.print((uint8_t)(Register.Positive));
+	Serial.print(",");
+	Serial.print((uint8_t)(Register.Negative));
+	Serial.print(")\n");
+}
+
+void AD7124::PrintConfigurationRegister(const ConfigurationRegister Register)
+{
+	Serial.print("[AD7124CONFIG](");
+	Serial.print(Register.Bipolar);
+	Serial.print(",");
+	Serial.print((uint8_t)(Register.Burnout));
+	Serial.print(",");
+	Serial.print(Register.BufferREFP);
+	Serial.print(",");
+	Serial.print(Register.BufferREFN);
+	Serial.print(",");
+	Serial.print(Register.BufferAINP);
+	Serial.print(",");
+	Serial.print(Register.BufferAINM);
+	Serial.print(",");
+	Serial.print((uint8_t)(Register.Reference));
+	Serial.print(",");
+	Serial.print((uint8_t)(Register.Gain));
+	Serial.print(")\n");
+}
+
+void AD7124::PrintFilterRegister(const FilterRegister Register)
+{
+	Serial.print("[AD7124FILTER](");
+	Serial.print((uint8_t)(Register.FilterType));
+	Serial.print(",");
+	Serial.print(Register.Reject5060Hz);
+	Serial.print(",");
+	Serial.print((uint8_t)(Register.PostFilterType));
+	Serial.print(",");
+	Serial.print(Register.SingleCycle);
+	Serial.print(",");
+	Serial.print((uint8_t)(Register.DataRate));
+	Serial.print(")\n");
+}
+
+void AD7124::PrintIDRegister(const IDRegister Register)
+{
+	Serial.print("[AD7124ID](");
+	Serial.print((uint8_t)(Register.IDType));
+	Serial.print(",");
+	Serial.print(Register.Revision);
+	Serial.print(")\n");
+}
+
+void AD7124::PrintDataRegister(const DataRegister Register)
+{
+	Serial.print("[AD7124DATA](");
+	Serial.print(Register.Data);
+	Serial.print(")\n");
+	if (Register.HasStatus)
+	{
+		PrintStatusRegister(Register.Status);
+	}
+}
+
 AD7124::AD7124(uint8_t _SelectPin)
 {
 	SelectPin = _SelectPin;
