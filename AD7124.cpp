@@ -479,6 +479,18 @@ void AD7124::PrintDataRegister(const DataRegister Register)
 	}
 }
 
+double AD7124::ConvertDataRegisterToDouble(const DataRegister Register, const bool Bipolar, const float Gain, const float Vref)
+{
+	if (Bipolar)
+	{
+		return ( (double)(Regsiter.Data) / ( (double)(8388608.0) ) - 1.0) * (double)(Vref)/(double)(Gain);
+	}
+	else
+	{
+		return (double)(Register.Data)*( ( (double)(Vref) ) /( (double)(16777216.0) * (double)(Gain)) );
+	}
+}
+
 AD7124::AD7124(uint8_t _SelectPin)
 {
 	SelectPin = _SelectPin;
