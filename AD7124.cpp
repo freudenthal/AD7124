@@ -479,19 +479,32 @@ void AD7124::PrintDataRegister(const DataRegister Register)
 	}
 }
 
-double AD7124::ConvertDataRegisterToDouble(const DataRegister Register, const float Vref)
+double AD7124::ConvertDataRegisterToDouble(const DataRegister Register, const float VrefExternal)
 {
 	if (Register.HasStatus)
 	{
 		ChannelRegister ChannelRegisterActive = GetChannelRegister(Register.Status.CurrentChannel);
 		ConfigurationRegister ConfigurationRegisterActive = GetConfigurationRegister(ChannelRegisterActive.Configuration);
 		float GainScalar = ConvertGainToScalar(ConfigurationRegisterActive.Gain);
+		float Vref = ConverVrefToScalar(ConfigurationRegisterActive.Reference, VrefExternal);
 		return ConvertDataRegisterToDouble(Register, ConfigurationRegisterActive.Bipolar, GainScalar, Vref);
 	}
 	else
 	{
 		Serial.print("<AD7124ERROR>(Unable to find channel. Please use complete convert function.)\n");
 		return 0.0;
+	}
+}
+
+float AD7124::ConverVrefToScalar(ReferenceSettings VrefSetting, const float VrefExternal)
+{
+	if (VrefSetting == ReferenceSettings::InternalReference)
+	{
+		return 2.5;
+	}
+	else
+	{
+		return VrefExternal;
 	}
 }
 

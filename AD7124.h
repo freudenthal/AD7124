@@ -496,7 +496,8 @@ class AD7124
 		DataRegister GetDataRegister();
 		ErrorRegister GetErrorRegister();
 		ControlRegister GetControlRegister();
-		double ConvertDataRegisterToDouble(const DataRegister Register, const float Vref);
+		double ConvertDataRegisterToDouble(const DataRegister Register, const float VrefExternal);
+		float ConverVrefToScalar(ReferenceSettings VrefSetting, const float VrefExternal);
 		float ConvertGainToScalar(GainSettings GainInput);
 		double ConvertDataRegisterToDouble(const DataRegister Register, const bool Bipolar, const float Gain, const float Vref);
 		void SetControlRegister(ControlRegister NewSettings);
