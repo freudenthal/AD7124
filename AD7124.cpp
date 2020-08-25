@@ -491,7 +491,7 @@ double AD7124::ConvertDataRegisterToDouble(const DataRegister Register, const fl
 	else
 	{
 		Serial.print("<AD7124ERROR>(Unable to find channel. Please use complete convert function.)\n");
-		return 0.0
+		return 0.0;
 	}
 }
 
@@ -499,21 +499,21 @@ float AD7124::ConvertGainToScalar(GainSettings GainInput)
 {
 	switch(GainInput)
 	{
-		case Gain1x:
+		case GainSettings::Gain1x:
 			return 1.0;
-		case Gain2x:
+		case GainSettings::Gain2x:
 			return 2.0;
-		case Gain4x:
+		case GainSettings::Gain4x:
 			return 4.0;
-		case Gain8x:
+		case GainSettings::Gain8x:
 			return 8.0;
-		case Gain16x:
+		case GainSettings::Gain16x:
 			return 16.0;
-		case Gain32x:
+		case GainSettings::Gain32x:
 			return 32.0;
-		case Gain64x:
+		case GainSettings::Gain64x:
 			return 64.0;
-		case Gain128x:
+		case GainSettings::Gain128x:
 			return 128.0;
 		default:
 			Serial.print("<AD7124ERROR>(Unable to convert gain.)\n");
