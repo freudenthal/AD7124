@@ -525,7 +525,7 @@ double AD7124::ConvertDataRegisterToDouble(const DataRegister Register, const bo
 {
 	if (Bipolar)
 	{
-		return ( (double)(Regsiter.Data) / ( (double)(8388608.0) ) - 1.0) * (double)(Vref)/(double)(Gain);
+		return ( (double)(Register.Data) / ( (double)(8388608.0) ) - 1.0) * (double)(Vref)/(double)(Gain);
 	}
 	else
 	{
