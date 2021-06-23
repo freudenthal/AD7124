@@ -136,7 +136,7 @@ const AD7124::ChannelRegister AD7124::InitChannelSettings0
 
 const AD7124::ChannelRegister AD7124::InitChannelSettings1
 {
-	.Enable = true,
+	.Enable = false,
 	.Configuration = 1,
 	.Positive = AnalogueInputSettings::AIN5,
 	.Negative = AnalogueInputSettings::AIN4
@@ -211,8 +211,8 @@ const AD7124::FilterRegister AD7124::InitFilterSettings0
 	.FilterType = FilterTypeSettings::Sinc4,
 	.Reject5060Hz = true,
 	.PostFilterType = PostFilerTypeSettings::SPS27,
-	.SingleCycle = false,
-	.DataRate = 20
+	.SingleCycle = true,
+	.DataRate = 8
 };
 
 const AD7124::FilterRegister AD7124::InitFilterSettings1
@@ -221,7 +221,7 @@ const AD7124::FilterRegister AD7124::InitFilterSettings1
 	.Reject5060Hz = true,
 	.PostFilterType = PostFilerTypeSettings::SPS27,
 	.SingleCycle = false,
-	.DataRate = 20
+	.DataRate = 8
 };
 
 const AD7124::FilterRegister AD7124::InitFilterSettings2
@@ -230,7 +230,7 @@ const AD7124::FilterRegister AD7124::InitFilterSettings2
 	.Reject5060Hz = true,
 	.PostFilterType = PostFilerTypeSettings::SPS27,
 	.SingleCycle = false,
-	.DataRate = 20
+	.DataRate = 8
 };
 
 const AD7124::FilterRegister AD7124::InitFilterSettingsDefault
@@ -239,7 +239,7 @@ const AD7124::FilterRegister AD7124::InitFilterSettingsDefault
 	.Reject5060Hz = true,
 	.PostFilterType = PostFilerTypeSettings::SPS27,
 	.SingleCycle = false,
-	.DataRate = 20
+	.DataRate = 8
 };
 
 void AD7124::PrintStatusRegister(const StatusRegister Register)
