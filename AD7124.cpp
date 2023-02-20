@@ -66,7 +66,7 @@ const AD7124::RegisterStructure AD7124::RegisterDictionary[AD7124NumberOfRegiste
 const AD7124::ControlRegister AD7124::InitControlSettings
 {
 	.DOUTFunction = false,
-	.ContinousRead = true,
+	.ContinousRead = false,
 	.DataStatus = true,
 	.CSEnable = true,
 	.ReferenceEnable = true,
