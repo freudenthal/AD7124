@@ -66,7 +66,7 @@ const AD7124::RegisterStructure AD7124::RegisterDictionary[AD7124NumberOfRegiste
 const AD7124::ControlRegister AD7124::InitControlSettings
 {
 	.DOUTFunction = false,
-	.ContinousRead = false,
+	.ContinousRead = true,
 	.DataStatus = true,
 	.CSEnable = true,
 	.ReferenceEnable = true,
@@ -211,7 +211,7 @@ const AD7124::FilterRegister AD7124::InitFilterSettings0
 	.FilterType = FilterTypeSettings::Sinc4,
 	.Reject5060Hz = true,
 	.PostFilterType = PostFilerTypeSettings::SPS27,
-	.SingleCycle = true,
+	.SingleCycle = false,
 	.DataRate = 8
 };
 
@@ -551,7 +551,7 @@ AD7124::AD7124(uint8_t _SelectPin)
 	SelectPin = _SelectPin;
 	pinMode(SelectPin, OUTPUT);
 	digitalWrite(SelectPin, HIGH);
-	ConnectionSettings = SPISettings(4000000, MSBFIRST, SPI_MODE3);
+	ConnectionSettings = SPISettings(1000000, MSBFIRST, SPI_MODE3);
 	UseCRC = false;
 	UseStatus = false;
 }
@@ -731,7 +731,10 @@ AD7124::DataRegister AD7124::GetDataRegister()
 		ReturnRegister.HasStatus = false;
 	}
 	ReturnRegister.Data = ReturnData.Single >> 8;
-	SamplingActive = false;
+	if (!UseContinuous)
+	{
+		SamplingActive = false;
+	}
 	return ReturnRegister;
 }
 
@@ -784,13 +787,16 @@ void AD7124::UpdateInternalControlRegisters(ControlRegister Register)
 	UseStatus = Register.DataStatus;
 	UseContinuous = (Register.OperatingMode == OperatingModeSettings::Continuous);
 	PowerMode = Register.PowerMode;
-	if (Register.OperatingMode == OperatingModeSettings::Single)
+	if (!UseContinuous)
 	{
-		SamplingActive = true;
-	}
-	else
-	{
-		SamplingActive = false;
+		if (Register.OperatingMode == OperatingModeSettings::Single)
+		{
+			SamplingActive = true;
+		}
+		else
+		{
+			SamplingActive = false;
+		}
 	}
 }
 
